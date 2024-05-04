@@ -28,8 +28,7 @@ List the ready features here:
 
 
 ## Screenshots
-![Example screenshot](test/1.png)
-![Example screenshot](test/4.png)
+
 ![Example screenshot](test/7.png)
 ![Example screenshot](test/10.png)
 ![Example screenshot](test/13.png)
