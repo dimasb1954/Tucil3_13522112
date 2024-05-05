@@ -30,10 +30,6 @@ List the ready features here:
 ## Screenshots
 
 ![alt text](test/1714900878585.gif)
-![Example screenshot](test/7.png)
-![Example screenshot](test/10.png)
-![Example screenshot](test/13.png)
-
 
 ## Setup
 
