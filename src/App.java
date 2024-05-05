@@ -54,6 +54,7 @@ public class App {
                                 long startTime = System.nanoTime();
                                 GreedyBFS GBFS = new GreedyBFS(wordStart, wordEnd, dictionaryFilePath);
                                 String[] ladderGBFS = GBFS.findGBFS(wordStart, wordEnd, GBFS.dictionary);
+                                System.out.println("\nWord ladder from " + wordStart + " to " +   wordEnd + ":");
                                 for (String word : ladderGBFS) {
                                     System.out.println(word);
                                 }
@@ -67,6 +68,7 @@ public class App {
                                 long startTime = System.nanoTime();
                                 Astar astar = new Astar(wordStart, wordEnd, dictionaryFilePath);
                                 String[] ladderAstar = astar.findAstar(wordStart, wordEnd, astar.dictionary);
+                                System.out.println("\nWord ladder from " + wordStart + " to " +   wordEnd + ":");
                                 for (String word : ladderAstar) {
                                     System.out.println(word);
                                 }
