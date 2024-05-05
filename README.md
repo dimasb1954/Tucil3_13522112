@@ -25,10 +25,11 @@ Word ladder (juga dikenal sebagai Doublets, word-links, change-the-word puzzles,
 List the ready features here:
 - UCS
 - Greedy Best first Search
-
+- A*
 
 ## Screenshots
 
+![alt text](test/1714900878585.gif)
 ![Example screenshot](test/7.png)
 ![Example screenshot](test/10.png)
 ![Example screenshot](test/13.png)
@@ -40,8 +41,6 @@ Pastikan anda telah menginstall java pada perangkat anda
 
 https://phoenixnap.com/kb/install-java-windows
 
-Terminal command 
-
 ## Usage
 
 Bila ingin menggunakan program pastikan anda berada di path yang benar yaitu di folder src
@@ -51,6 +50,7 @@ Bila ingin menggunakan program pastikan anda berada di path yang benar yaitu di 
 Menjalankan word ladder solver pada CLI
 
 `javac App.java`
+
 `java App.java`
 
 

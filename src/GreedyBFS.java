@@ -14,6 +14,7 @@ public class GreedyBFS {
     public String start;
     public String end;
     public Set<String> dictionary;
+    public int total;
 
     public GreedyBFS(String a, String b, String dictionaryFilePath) throws IOException {
         this.start = a;
@@ -58,7 +59,7 @@ public class GreedyBFS {
             ladder.add(0, currentWord);
             currentWord = parentMap.get(currentWord);
         }
-        
+
         return ladder;
     }
 
@@ -71,6 +72,7 @@ public class GreedyBFS {
         queue.add(startNode);
         visited.add(startWord);
         parentMap.put(startWord, null);
+        this.total = 2;
         
         while (!queue.isEmpty()) {
             Node currentNode = queue.poll();
@@ -87,6 +89,7 @@ public class GreedyBFS {
                     Node neighborNode = new Node(neighbor);
                     queue.add(neighborNode);
                     parentMap.put(neighbor, currentWord);
+                    this.total++;
                 }
             }
         }

@@ -15,6 +15,7 @@ public class UCS {
     public String start;
     public String end;
     public Set<String> dictionary;
+    public int total;
 
     public UCS(String a, String b, String dictionaryFilePath) throws IOException {
         this.start = a;
@@ -62,6 +63,7 @@ public class UCS {
         priorityQueue.add(startNode);
         costMap.put(startWord, 0);
         parentMap.put(startWord, null);
+        this.total = 2;
         
         while (!priorityQueue.isEmpty()) {
             Node currentNode = priorityQueue.poll();
@@ -90,11 +92,12 @@ public class UCS {
                         Node neighborNode = new Node(neighbor);
                         neighborNode.setCost(newCost);
                         priorityQueue.add(neighborNode);
+                        this.total++;
                     }
                 }
             }
         }
-        
+
         return new String[]{"No ladder found"};
     }
 }

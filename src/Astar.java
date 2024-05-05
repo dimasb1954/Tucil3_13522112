@@ -14,6 +14,7 @@ public class Astar {
     public String start;
     public String end;
     public Set<String> dictionary;
+    public int total;
 
     public Astar(String a, String b, String dictionaryFilePath) throws IOException {
         this.start = a;
@@ -85,6 +86,7 @@ public class Astar {
         openSet.add(startNode);
         costMap.put(startWord, 0);
         parentMap.put(startWord, null);
+        this.total = 2;
         
         while (!openSet.isEmpty()) {
             NodeH currentNode = openSet.poll();
@@ -104,6 +106,7 @@ public class Astar {
                         parentMap.put(neighbor, currentWord);
                         NodeH neighborNode = new NodeH(neighbor, newCost, heuristic(neighbor, endWord));
                         openSet.add(neighborNode);
+                        this.total++;
                     }
                 }
             }
