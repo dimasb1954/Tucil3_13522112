@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -37,63 +38,57 @@ public class GreedyBFS {
         return dictionary;
     }
     
-    public boolean isOneLetterDifference(String word1, String word2) {
-        int diffCount = 0;
-
-        for (int i = 0; i < word1.length(); i++) {
-            if (word1.charAt(i) != word2.charAt(i)) {
-                diffCount++;
-            }
-            if (diffCount > 1) {
-                return false;
-            }
-        }
-
-        return diffCount == 1;
-    }
-    
-    public List<String> reconstructPath(Map<String, String> parentMap, String endWord) {
-        List<String> ladder = new ArrayList<>();
-        String currentWord = endWord;
-        while (currentWord != null) {
-            ladder.add(0, currentWord);
-            currentWord = parentMap.get(currentWord);
-        }
-
-        return ladder;
-    }
-
-    public String[] findGBFS(String startWord, String endWord, Set<String> wordList) {
-        Queue<Node> queue = new LinkedList<>();
-        Map<String, String> parentMap = new HashMap<>();
+    public List<String> findGBFS(String start, String end, Set<String> wordList) {
+        Queue<String> queue = new LinkedList<>();
+        Map<String, String> parent = new HashMap<>();
         Set<String> visited = new HashSet<>();
-        
-        Node startNode = new Node(startWord);
-        queue.add(startNode);
-        visited.add(startWord);
-        parentMap.put(startWord, null);
-        this.total = 2;
-        
+
+        queue.offer(start);
+        visited.add(start);
+        total = 2;
+
         while (!queue.isEmpty()) {
-            Node currentNode = queue.poll();
-            String currentWord = currentNode.getWord();
-            
-            if (currentWord.equals(endWord)) {
-                List<String> ladder = reconstructPath(parentMap, endWord);
-                return ladder.toArray(new String[0]);
+        String currentWord = queue.poll();
+
+        if (currentWord.equals(end)) {
+            // Solusi ditemukan, rekonstruksi word ladder
+            List<String> ladder = new ArrayList<>();
+            ladder.add(currentWord);
+            while (currentWord != null) {
+            currentWord = parent.get(currentWord);
+            if (currentWord != null) {
+                ladder.add(currentWord);
             }
-            
-            for (String neighbor : wordList) {
-                if (!visited.contains(neighbor) && isOneLetterDifference(currentWord, neighbor)) {
-                    visited.add(neighbor);
-                    Node neighborNode = new Node(neighbor);
-                    queue.add(neighborNode);
-                    parentMap.put(neighbor, currentWord);
-                    this.total++;
-                }
+            }
+            Collections.reverse(ladder);
+            return ladder;
+        }
+
+        for (String neighbor : getNeighbors(currentWord, wordList)) {
+            if (!visited.contains(neighbor)) {
+            queue.offer(neighbor);
+            visited.add(neighbor);
+            parent.put(neighbor, currentWord);
+            total++;
             }
         }
-        
-        return new String[]{"No ladder found"};
+        }
+
+        return null; // Solusi tidak ditemukan
+    }
+
+    private static Set<String> getNeighbors(String word, Set<String> wordList) {
+        Set<String> neighbors = new HashSet<>();
+        for (int i = 0; i < word.length(); i++) {
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (c != word.charAt(i)) {
+            String newWord = word.substring(0, i) + c + word.substring(i + 1);
+            if (wordList.contains(newWord)) {
+                neighbors.add(newWord);
+            }
+            }
+        }
+        }
+        return neighbors;
     }
 }

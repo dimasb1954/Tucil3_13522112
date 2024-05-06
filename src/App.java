@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -53,7 +54,7 @@ public class App {
                             } else if (opt == 2){
                                 long startTime = System.nanoTime();
                                 GreedyBFS GBFS = new GreedyBFS(wordStart, wordEnd, dictionaryFilePath);
-                                String[] ladderGBFS = GBFS.findGBFS(wordStart, wordEnd, GBFS.dictionary);
+                                List<String> ladderGBFS = GBFS.findGBFS(wordStart, wordEnd, GBFS.dictionary);
                                 System.out.println("\nWord ladder from " + wordStart + " to " +   wordEnd + ":");
                                 for (String word : ladderGBFS) {
                                     System.out.println(word);
